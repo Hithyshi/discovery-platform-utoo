@@ -12,5 +12,6 @@ urlpatterns = [
 #    url(r'^hith/', include('clarito.urls')),
 #    url(r'^hith/$', 'clarito.views.joinroute', name='joinroute'), 
     url(r'^(?P<routeid>[^/]+)/(?P<routename>[^/]+)/$', 'clarito.views.joinroute', name='joinroute'),
+    url(r'^customerjoin/(?P<routeid>[^/]+)/(?P<routename>[^/]+)/$', 'clarito.views.customerjoin', name='customerjoin'),
    #url(r'^admin/', include(admin.site.urls)),
 ]

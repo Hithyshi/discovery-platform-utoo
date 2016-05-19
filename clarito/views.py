@@ -25,7 +25,7 @@ def joinroute(request, routeid, routename):
     if route_table_result['results'] == []:
         return HttpResponseNotFound('<h1>Page not found</h1>')
     else:
-        no_of_customers=int(route_table_result['results'][0]['numCustomers'])
+        no_of_customers=route_table_result['results'][0]['custCount']
         print(no_of_customers)
     
         from_addr=route_table_result['results'][0]['from']
@@ -34,7 +34,49 @@ def joinroute(request, routeid, routename):
         print (full_route)
         if full_route == routename:
         
-            return render_to_response("routepage.html", {"routename":routename, "no_of_customers":no_of_customers}, context_instance=RequestContext(request))
+            return render_to_response("routepage.html", {"routename":routename, "routeid":routeid, "no_of_customers":no_of_customers}, context_instance=RequestContext(request))
 
         else :
             return HttpResponseNotFound('<h1>Page not found</h1>')
+
+
+def customerjoin(request, routeid, routename):
+    customer_phone=request.POST['mobile']    
+    connection = http.client.HTTPSConnection('api.parse.com', 443)
+    params = urllib.parse.urlencode({"where":json.dumps({
+           "userPhone":customer_phone
+         })})
+    connection.connect()
+    connection.request('GET', '/1/classes/RouteJoin?%s' % params, '', {
+           "X-Parse-Application-Id": "IBArnAuw83Th0SfDmF55VdMUgsNXFiL2TuC6qwiC",
+           "X-Parse-REST-API-Key": "2coKSQ3ZGvWRJW3ZVReOs7ETy4rXiMP2i54eTO4N"
+         })
+    myresult=json.loads(connection.getresponse().read().decode())
+    print (myresult)
+    if myresult['results'] == []:
+        connection.request('POST', '/1/classes/RouteJoin', json.dumps({
+               "userPhone":customer_phone,
+               "routeId":routeid
+             }), {
+            "X-Parse-Application-Id": "IBArnAuw83Th0SfDmF55VdMUgsNXFiL2TuC6qwiC",
+            "X-Parse-REST-API-Key": "2coKSQ3ZGvWRJW3ZVReOs7ETy4rXiMP2i54eTO4N"
+        })
+
+        
+#        the_objid = (myresult['results'][0]['objectId'])
+        connection = http.client.HTTPSConnection('api.parse.com', 443)
+        connection.connect()
+        connection.request('PUT', '/1/classes/Route/'+routeid, json.dumps({
+               "custCount": {
+                 "__op": "Increment",
+                 "amount": 1
+               }
+             }), {
+               "X-Parse-Application-Id": "IBArnAuw83Th0SfDmF55VdMUgsNXFiL2TuC6qwiC",
+               "X-Parse-REST-API-Key": "2coKSQ3ZGvWRJW3ZVReOs7ETy4rXiMP2i54eTO4N",
+               "Content-Type": "application/json"
+             })
+        return HttpResponseRedirect("/"+routeid+"/"+routename+"/")
+
+    else:
+        return HttpResponseRedirect("/"+routeid+"/"+routename+"/")
