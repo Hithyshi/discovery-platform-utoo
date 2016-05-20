@@ -8,12 +8,9 @@ import urllib.request
 import urllib.parse
 import json,http.client
 import datetime, os, re
-import settings
 # Create your views here.
 
 def joinroute(request, routeid, routename):
-    print (settings.BASE_DIR)
-    print (settings.PARENT_ROOT)
     connection = http.client.HTTPSConnection('api.parse.com', 443)
     params = urllib.parse.urlencode({"where":json.dumps({
            "objectId":routeid
