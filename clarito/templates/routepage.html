@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <head>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <title>{{ routename }} - Utoo Your Daily commute</title>
 
     <meta content="{{ routename }} Daily travel to office at Rs.4/Km with Utoo-Your Daily Commute" property="og:title">
@@ -18,7 +20,7 @@
 <form action="/customerjoin/{{ routeid }}/{{ routename }}/" method="POST">
     {% csrf_token %} 
     Enter your 10 digit mobile number:<br>
-    <input type="text" name="mobile" maxlength="10" pattern="[0-9]{10}" title="Enter your 10 digit mobile number" required> <input type="submit" value="Join Route"> </form>
+    <input type="text" name="mobile" maxlength="10" pattern="[0-9]{10}" title="Enter your 10 digit mobile number" required> <input type="submit" id="buttonpress" value="Join Route"> </form>
 <br>
 <br>
 <br>
@@ -26,5 +28,15 @@
 
 </center>
 
+<script>
+document.getElementById("buttonpress").onclick = function() {
+        swal({
+                title: "Thank you for joining!",
+                text: "Download our Utoo app at Playstore for onboarding",
+                timer: 2000,
+                showConfirmButton: false
+        });
+};
+</script>
 </body>
 </html>
