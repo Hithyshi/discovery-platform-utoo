@@ -16,7 +16,7 @@
 
 <center>
 
-<h1>Your route {{ routename }} is now open</h1>
+<h1 class="sansserif">Your route {{ routename }} is now open</h1>
 
 <form action="/customerjoin/{{ routeid }}/{{ routename }}/" method="POST">
     {% csrf_token %} 
@@ -25,7 +25,7 @@
 <br>
 <br>
 <br>
-<p>There are currently {{ no_of_customers }} customers have joined this route</p>
+<p class="sansserif">There are currently {{ no_of_customers }} customers have joined this route</p>
 
 </center>
 
