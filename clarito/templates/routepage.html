@@ -20,8 +20,8 @@
 
 <form action="/customerjoin/{{ routeid }}/{{ routename }}/" method="POST">
     {% csrf_token %} 
-    Enter your 10 digit mobile number:<br>
-    <input type="text" name="mobile" maxlength="10" pattern="[0-9]{10}" title="Enter your 10 digit mobile number" required> <input type="submit" id="buttonpress" value="Join Route"> </form>
+    <p class="sansserif">Enter your 10 digit mobile number:</p><br>
+    <input type="text" style="width: 300px;" name="mobile" maxlength="10" pattern="[0-9]{10}" title="Enter your 10 digit mobile number" required> <input type="submit" id="buttonpress" value="Join Route"> </form>
 <br>
 <br>
 <br>
