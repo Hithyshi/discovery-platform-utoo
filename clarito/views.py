@@ -75,6 +75,14 @@ def customerjoin(request, routeid, routename):
                "X-Parse-REST-API-Key": "2coKSQ3ZGvWRJW3ZVReOs7ETy4rXiMP2i54eTO4N",
                "Content-Type": "application/json"
              })
+
+        msg='Dear customer , your booking is confirmed. Driver details will be shared shortly. Thank You. Visit us at utoorides.com or call 8884615615'        
+        data =  urllib.parse.urlencode({'username': 'sweekar07@yahoo.com', 'hash': '24a69c12340e221b4095b87d65b2e79b27999932', 'numbers': customer_phone, 'message' : msg, 'sender': 'UTOORD'})
+        data = data.encode('utf-8')
+        request = urllib.request.Request("http://api.textlocal.in/send/?")
+        f = urllib.request.urlopen(request, data)
+        fr = f.read()
+        print (fr)
         return HttpResponseRedirect("/"+routeid+"/"+routename+"/")
 
     else:
