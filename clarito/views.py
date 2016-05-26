@@ -43,7 +43,8 @@ def customerjoin(request, routeid, routename):
     customer_phone=request.POST['mobile']    
     connection = http.client.HTTPSConnection('api.parse.com', 443)
     params = urllib.parse.urlencode({"where":json.dumps({
-           "userPhone":customer_phone
+           "userPhone":customer_phone,
+           "routeId":routeid
          })})
     connection.connect()
     connection.request('GET', '/1/classes/RouteJoin?%s' % params, '', {
