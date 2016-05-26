@@ -31,6 +31,6 @@ input.submitbutton {
 
 input.textfield {
     -webkit-appearance: none;
-    width: 270px;  height: 45px;
+    width: 270px;  height: 50px;
     font-size: 21px;
 }
