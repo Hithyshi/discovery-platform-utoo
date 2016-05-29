@@ -16,7 +16,7 @@
 
 <center>
 <img src="/static/images/2.gif" alt="This will display an animated GIF" />
-<h1 class="sansserif">Your route {{ routename }} is now open</h1>
+<h1 class="sansserif">{{ cust_message }}</h1>
 
 <form action="/customerjoin/{{ routeid }}/{{ routename }}/" method="POST">
     {% csrf_token %} 

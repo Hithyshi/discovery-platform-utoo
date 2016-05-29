@@ -32,8 +32,12 @@ def joinroute(request, routeid, routename):
         full_route=from_addr + " to " + to_addr
         print (full_route)
         if full_route == routename:
-        
-            return render_to_response("routepage.html", {"routename":routename, "routeid":routeid, "no_of_customers":no_of_customers}, context_instance=RequestContext(request))
+            if "custmMessage" in route_table_result['results'][0]:
+                print("custmMessage there")
+                cust_message=route_table_result['results'][0]['custmMessage']
+            else:
+                cust_message="Your route "+ routename + " is now open"        
+            return render_to_response("routepage.html", {"routename":routename, "routeid":routeid, "no_of_customers":no_of_customers, "cust_message": cust_message}, context_instance=RequestContext(request))
 
         else :
             return HttpResponseNotFound('<h1>Page not found</h1>')
