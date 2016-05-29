@@ -81,7 +81,8 @@ def customerjoin(request, routeid, routename):
                "Content-Type": "application/json"
              })
 
-        msg='Dear customer , your booking is confirmed. Driver details will be shared shortly. Thank You. Visit us at utoorides.com or call 8884615615'        
+#        msg='Dear customer , your booking is confirmed. Driver details will be shared shortly. Thank You. Visit us at utoorides.com or call 8884615615'        
+        msg='Thank you dear friend for signingUp, please download Utoo app for onboarding. Utoo in Playstore Your route details http://utoorides.com'
         data =  urllib.parse.urlencode({'username': 'sweekar07@yahoo.com', 'hash': '24a69c12340e221b4095b87d65b2e79b27999932', 'numbers': customer_phone, 'message' : msg, 'sender': 'UTOORD'})
         data = data.encode('utf-8')
         request = urllib.request.Request("http://api.textlocal.in/send/?")
